@@ -65,41 +65,82 @@
   /* ---- Header ---- */
   header.app {
     text-align: center;
-    padding: 26px 8px 14px;
+    padding: 32px 22px 28px;
+    margin: 6px 0 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--accent-soft);
+    background:
+      radial-gradient(130% 110% at 50% -10%, #fff7f0 0%, var(--accent-tint) 48%, #fffdfb 100%);
+    box-shadow: 0 14px 38px rgba(180,100,60,0.10), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  /* soft decorative glow behind the badge */
+  header.app::before {
+    content: "";
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,130,90,0.18), transparent 70%);
+    pointer-events: none;
   }
   header.app .badge {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 12px;
-    border-radius: 22px;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 14px;
+    border-radius: 24px;
     background: linear-gradient(150deg, var(--accent), var(--accent-deep));
-    box-shadow: 0 10px 24px rgba(180,90,55,0.35), inset 0 1px 0 rgba(255,255,255,0.3);
+    box-shadow: 0 12px 26px rgba(180,90,55,0.38), inset 0 1px 0 rgba(255,255,255,0.35);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 34px;
+    position: relative;
+    animation: badgeIn 0.5s cubic-bezier(.2,.9,.3,1.2) both;
+  }
+  @keyframes badgeIn {
+    from { transform: scale(0.6) rotate(-8deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0); opacity: 1; }
   }
   header.app h1 {
-    font-size: 25px;
-    margin: 0 0 4px;
+    font-size: 27px;
+    margin: 0 0 6px;
     font-weight: 800;
-    letter-spacing: -0.4px;
+    letter-spacing: -0.5px;
+    position: relative;
   }
   header.app .kg {
     display: inline-block;
     font-size: 13px;
     font-weight: 700;
     color: var(--accent-deep);
-    background: var(--accent-soft);
-    padding: 3px 11px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--accent-soft);
+    padding: 4px 13px;
     border-radius: 999px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    position: relative;
   }
   header.app p {
     margin: 0 auto;
     max-width: 420px;
-    color: var(--muted);
-    font-size: 14.5px;
+    color: #7a7068;
+    font-size: 15.5px;
+    line-height: 1.6;
+    position: relative;
+  }
+  header.app p .hb {
+    display: inline-block;
+    animation: heartbeat 1.8s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%, 70%, 100% { transform: scale(1); }
+    80% { transform: scale(1.18); }
+    90% { transform: scale(1.05); }
   }
 
   /* ---- Progress ---- */
@@ -544,7 +585,7 @@
     <div class="badge">🧢</div>
     <div class="kg">גן צליל ים</div>
     <h1>כובעי סוף שנה</h1>
-    <p>ועד ההורים אוסף מידות כובע ואיות שמות — לקראת מתנת סוף השנה 💛</p>
+    <p>הורים יקרים, בחרו את מידת הכובע המתאימה לילד/ה <span class="hb">💛</span></p>
   </header>
 
   <div class="progress-bar-wrap">
@@ -565,7 +606,6 @@
   <div id="listRoot"></div>
 
   <footer class="app">
-    הנתונים נשמרים בגיליון אחד של הוועד.<br>
     אפשר לעדכן בכל עת — פשוט לוחצים שוב על שם הילד/ה <span class="heart">♥</span>
   </footer>
 </div>
