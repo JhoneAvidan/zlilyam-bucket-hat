@@ -97,11 +97,12 @@ function doPost(e) {
       }
     }
 
-    if (foundRow > 0) {
-      sheet.getRange(foundRow, 1, 1, rowValues.length).setValues([rowValues]);
-    } else {
-      sheet.appendRow(rowValues);
-    }
+    var targetRow = foundRow > 0 ? foundRow : sheet.getLastRow() + 1;
+    var range = sheet.getRange(targetRow, 1, 1, rowValues.length);
+    // Force plain-text format BEFORE writing so Sheets doesn't turn hat sizes
+    // like "2-4" / "4-6" into dates (and keeps ids/timestamps as typed).
+    range.setNumberFormat('@');
+    range.setValues([rowValues]);
 
     return jsonOut_({ ok: true, id: data.id, updated: foundRow > 0 });
   } catch (err) {

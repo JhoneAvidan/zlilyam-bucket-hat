@@ -692,7 +692,11 @@ async function submitResponse(payload) {
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify(payload),
   });
-  return res.json();
+  const data = await res.json();
+  if (!data || data.ok === false) {
+    throw new Error((data && data.error) || "server error");
+  }
+  return data;
 }
 
 /* ============================================================
