@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#f2f0ec" />
+<title>כובעי סוף שנה 🧢 — גן צליל ים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* warm, calm palette */
+    --accent: #e8825a;
+    --accent-dark: #cf6841;
+    --accent-deep: #a9512f;
+    --accent-soft: #fbeee6;
+    --accent-tint: #fdf6f1;
+
+    --bg: #f6f3ee;
+    --bg-grad-1: #f7f1ea;
+    --bg-grad-2: #f2efe9;
+    --card: #ffffff;
+    --text: #33302c;
+    --muted: #948c83;
+    --line: #ece6dd;
+    --line-soft: #f3eee6;
+
+    --ok: #4aa873;
+    --ok-soft: #e9f5ee;
+    --ok-line: #cfe9d8;
+
+    --shadow-sm: 0 1px 2px rgba(80,60,40,0.05), 0 2px 8px rgba(80,60,40,0.05);
+    --shadow-md: 0 4px 14px rgba(90,65,45,0.08), 0 1px 3px rgba(90,65,45,0.06);
+    --shadow-lg: 0 18px 50px rgba(70,45,25,0.18);
+
+    --radius-sm: 12px;
+    --radius: 16px;
+    --radius-lg: 22px;
+    --radius-xl: 28px;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    background-image: radial-gradient(120% 60% at 50% 0%, var(--bg-grad-1) 0%, var(--bg-grad-2) 60%, var(--bg) 100%);
+    color: var(--text);
+    font-family: "Assistant", "Segoe UI", -apple-system, BlinkMacSystemFont,
+      "Helvetica Neue", Arial, "Noto Sans Hebrew", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 8px 16px calc(40px + env(safe-area-inset-bottom));
+  }
+
+  /* ---- Header ---- */
+  header.app {
+    text-align: center;
+    padding: 26px 8px 14px;
+  }
+  header.app .badge {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 12px;
+    border-radius: 22px;
+    background: linear-gradient(150deg, var(--accent), var(--accent-deep));
+    box-shadow: 0 10px 24px rgba(180,90,55,0.35), inset 0 1px 0 rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  header.app h1 {
+    font-size: 25px;
+    margin: 0 0 4px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+  }
+  header.app .kg {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 3px 11px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  header.app p {
+    margin: 0 auto;
+    max-width: 420px;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+
+  /* ---- Progress ---- */
+  .progress-bar-wrap {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin: 18px 0 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .progress-bar-wrap .label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 9px;
+  }
+  .progress-bar-wrap .label .count { font-size: 14px; }
+  .progress-bar-wrap .label strong { color: var(--accent-deep); font-size: 16px; font-weight: 800; }
+  .track {
+    height: 9px;
+    background: var(--line-soft);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .track > span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    border-radius: 999px;
+    transition: width 0.55s cubic-bezier(.2,.8,.2,1);
+  }
+
+  /* ---- Search ---- */
+  .search {
+    position: relative;
+    margin: 4px 0 10px;
+  }
+  .search input {
+    width: 100%;
+    padding: 14px 46px 14px 16px;
+    font-size: 16px;
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card);
+    color: var(--text);
+    outline: none;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search input::placeholder { color: #b3aaa0; }
+  .search input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .search .icon {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 17px;
+    pointer-events: none;
+  }
+
+  /* ---- Group ---- */
+  .group-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: 0.2px;
+    margin: 22px 4px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .group-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (min-width: 520px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ---- Card ---- */
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 16px 12px 14px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.14s ease, border-color 0.18s, box-shadow 0.18s, background 0.2s;
+    position: relative;
+    min-height: 104px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: transparent;
+    transition: background 0.2s;
+  }
+  @media (hover: hover) {
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: #e2d8cb; }
+  }
+  .card:active { transform: scale(0.975); }
+  .card.done {
+    border-color: var(--ok-line);
+    background: linear-gradient(180deg, var(--ok-soft), #fff 80%);
+  }
+  .card.done::before { background: var(--ok); }
+  .card .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-tint);
+    color: var(--accent-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .card.done .avatar { background: var(--ok-soft); color: var(--ok); }
+  .card .he {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+  }
+  .card .en {
+    font-size: 11.5px;
+    color: var(--muted);
+    direction: ltr;
+    letter-spacing: 0.2px;
+  }
+  .card .status {
+    margin-top: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    min-height: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 9px;
+    border-radius: 999px;
+  }
+  .card.done .status { color: var(--ok); background: var(--ok-soft); }
+  .card:not(.done) .status { color: #b08968; background: var(--accent-tint); font-weight: 600; }
+  .card .check {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--ok);
+    color: #fff;
+    font-size: 12px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(74,168,115,0.4);
+  }
+  .card.done .check { display: flex; }
+
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 36px 10px;
+    font-size: 15px;
+  }
+  .empty .big { font-size: 30px; display: block; margin-bottom: 8px; }
+
+  /* ---- Modal ---- */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(45, 32, 25, 0.42);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 50;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  .overlay.open { display: flex; animation: fade 0.2s ease; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  @media (min-width: 520px) {
+    .overlay { align-items: center; }
+  }
+
+  .sheet {
+    background: var(--card);
+    width: 100%;
+    max-width: 460px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    padding: 8px 22px calc(24px + env(safe-area-inset-bottom));
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s cubic-bezier(.2,.8,.2,1);
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+  @media (min-width: 520px) {
+    .sheet { border-radius: var(--radius-xl); animation: pop 0.2s ease; }
+  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  @keyframes pop { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .grabber {
+    width: 44px;
+    height: 5px;
+    background: var(--line);
+    border-radius: 999px;
+    margin: 8px auto 16px;
+  }
+
+  .name-hero {
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .name-hero .ring {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background: linear-gradient(150deg, var(--accent-soft), var(--accent-tint));
+    border: 2px solid var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--accent-deep);
+  }
+  .name-hero .he { font-size: 28px; font-weight: 800; letter-spacing: -0.4px; }
+  .name-hero .en { font-size: 14.5px; color: var(--muted); direction: ltr; margin-top: 1px; }
+
+  .field { margin-top: 20px; }
+  .field > label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-bottom: 9px;
+    color: #6b6259;
+  }
+
+  .toggle-row { display: flex; gap: 10px; }
+  .toggle-row button {
+    flex: 1;
+    padding: 14px 8px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--line);
+    background: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .toggle-row button.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  .toggle-row button.active.ok {
+    border-color: var(--ok);
+    background: var(--ok-soft);
+    color: var(--ok);
+    box-shadow: inset 0 0 0 1px var(--ok);
+  }
+
+  input.text, select {
+    width: 100%;
+    padding: 14px 14px;
+    font-size: 16px;
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--text);
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input.text:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23948c83' stroke-width='3' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 16px center;
+    padding-left: 42px;
+  }
+
+  .en-input {
+    direction: ltr;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .field-hint {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 8px;
+    padding-right: 2px;
+  }
+
+  .helper {
+    background: var(--accent-tint);
+    border: 1px solid var(--accent-soft);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #8a5e41;
+    margin-top: 12px;
+    line-height: 1.65;
+  }
+  .helper summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--accent-deep);
+    list-style: none;
+    user-select: none;
+  }
+  .helper summary::-webkit-details-marker { display: none; }
+  .helper summary::before { content: "📏 "; }
+  .helper p { margin: 9px 0 0; }
+
+  .actions { margin-top: 24px; display: flex; gap: 10px; }
+  .btn {
+    flex: 1;
+    padding: 15px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: inherit;
+    transition: filter 0.15s, opacity 0.15s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary {
+    background: linear-gradient(150deg, var(--accent), var(--accent-dark));
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(207,104,65,0.32);
+  }
+  .btn-primary:active { filter: brightness(0.96); }
+  .btn-primary:disabled { opacity: 0.55; cursor: default; box-shadow: none; }
+  .btn-ghost {
+    background: #fff;
+    border: 1.5px solid var(--line);
+    color: var(--muted);
+    flex: 0 0 auto;
+    padding: 15px 20px;
+  }
+
+  .msg {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 14px;
+    min-height: 20px;
+    font-weight: 700;
+  }
+  .msg.err { color: #d6453c; }
+  .msg.ok { color: var(--ok); }
+
+  .toast {
+    position: fixed;
+    bottom: calc(22px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%) translateY(130px);
+    background: var(--ok);
+    color: #fff;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 8px 24px rgba(74,168,115,0.45);
+    z-index: 100;
+    transition: transform 0.4s cubic-bezier(.2,.9,.2,1);
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  .loading-banner {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 8px;
+  }
+  .spin {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid var(--line);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: rot 0.8s linear infinite;
+    vertical-align: -2px;
+    margin-left: 6px;
+  }
+  @keyframes rot { to { transform: rotate(360deg); } }
+
+  footer.app {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 30px;
+    line-height: 1.7;
+  }
+  footer.app .heart { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app">
+    <div class="badge">🧢</div>
+    <div class="kg">גן צליל ים</div>
+    <h1>כובעי סוף שנה</h1>
+    <p>ועד ההורים אוסף מידות כובע ואיות שמות — לקראת מתנת סוף השנה 💛</p>
+  </header>
+
+  <div class="progress-bar-wrap">
+    <div class="label">
+      <span>התקדמות המילוי</span>
+      <span class="count"><strong id="doneCount">0</strong> / <span id="totalCount">0</span></span>
+    </div>
+    <div class="track"><span id="progressFill"></span></div>
+  </div>
+
+  <div class="search">
+    <span class="icon">🔍</span>
+    <input id="searchBox" type="search" placeholder="חיפוש לפי שם (עברית או אנגלית)…" autocomplete="off" />
+  </div>
+
+  <div id="loadingBanner" class="loading-banner"><span class="spin"></span> טוען נתונים קיימים…</div>
+
+  <div id="listRoot"></div>
+
+  <footer class="app">
+    הנתונים נשמרים בגיליון אחד של הוועד.<br>
+    אפשר לעדכן בכל עת — פשוט לוחצים שוב על שם הילד/ה <span class="heart">♥</span>
+  </footer>
+</div>
+
+<!-- Modal -->
+<div class="overlay" id="overlay">
+  <div class="sheet" id="sheet">
+    <div class="grabber"></div>
+    <div class="name-hero">
+      <div class="ring" id="mRing"></div>
+      <div class="he" id="mHe"></div>
+      <div class="en" id="mEn"></div>
+    </div>
+
+    <div class="field">
+      <label for="enName">שם באנגלית — לדפוס על המתנה</label>
+      <input class="text en-input" id="enName" type="text" dir="ltr" placeholder="English name" autocomplete="off" />
+      <div class="field-hint">השם כבר ממולא — תקנו רק אם האיות באנגלית לא מדויק ✍️</div>
+    </div>
+
+    <div class="field">
+      <label for="hatSize">מידת כובע (לפי גיל)</label>
+      <select id="hatSize">
+        <option value="">בחרו מידה…</option>
+        <option value="12-24m">12–24 חודשים</option>
+        <option value="2-4">2–4 שנים</option>
+        <option value="4-6">4–6 שנים</option>
+      </select>
+      <details class="helper">
+        <summary>לא בטוחים? בחרו לפי הגיל</summary>
+        <p>בחרו את המידה לפי גיל הילד/ה כיום. אם הילד/ה בין שתי מידות (או בקרוב ליום הולדת) — עדיף לבחור את המידה הגדולה יותר, כדי שהכובע יחזיק מעמד גם בהמשך.</p>
+      </details>
+    </div>
+
+    <div class="msg" id="formMsg"></div>
+
+    <div class="actions">
+      <button class="btn btn-ghost" id="btnCancel">ביטול</button>
+      <button class="btn btn-primary" id="btnSubmit">שליחה</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">נשמר! 🎉</div>
+
+<script>
+/* ============================================================
+   1) BACKEND URL  —  paste your Apps Script Web App URL here
+   ============================================================ */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYBZyCTQqHEPr8EMEBHlv6RcDy4hv4hGrFX0vQH9O7w8qGdjyScb2cF1YU1UDHT2GF/exec";
+
+/* ============================================================
+   2) CHILDREN LIST  —  edit freely
+   ============================================================ */
+const CHILDREN = [
+  // בנות / Girls
+  { id: 1,  he: "דני",   en: "Dani",   group: "girls" },
+  { id: 2,  he: "אדל",   en: "Adel",   group: "girls" },
+  { id: 3,  he: "גאיה",  en: "Gaya",   group: "girls" },
+  { id: 4,  he: "נעמי",  en: "Naomie", group: "girls" },
+  { id: 5,  he: "לירי",  en: "Lyri",   group: "girls" },
+  { id: 6,  he: "זואי",  en: "Zoey",   group: "girls" },
+  { id: 7,  he: "רון",   en: "Ron",    group: "girls" },
+  // בנים / Boys
+  { id: 8,  he: "ריי",   en: "Ray",    group: "boys" },
+  { id: 9,  he: "בן",    en: "Ben",    group: "boys" },
+  { id: 10, he: "שון",   en: "Sean",   group: "boys" },
+  { id: 11, he: "ארי",   en: "Ari",    group: "boys" },
+  { id: 12, he: "פלג",   en: "Peleg",  group: "boys" },
+  { id: 13, he: "לני",   en: "Lenny",  group: "boys" },
+  { id: 14, he: "כרמי",  en: "Karmi",  group: "boys" },
+  { id: 15, he: "איתן",  en: "Eitan",  group: "boys" },
+  { id: 16, he: "אורי",  en: "Ori",    group: "boys" },
+  { id: 17, he: "אליה",  en: "Elia",   group: "boys" },
+  { id: 18, he: "מילאן", en: "Milan",  group: "boys" },
+];
+
+/* size value -> friendly Hebrew label (for status pills) */
+const SIZE_LABELS = {
+  "12-24m": "12–24 ח׳",
+  "2-4": "2–4 ש׳",
+  "4-6": "4–6 ש׳",
+};
+
+/* ============================================================
+   State
+   ============================================================ */
+const responses = {};   // id -> { finalName, hatSize, corrected, ... }
+let currentId = null;
+
+/* ============================================================
+   Networking
+   ============================================================ */
+async function loadResponses() {
+  if (SCRIPT_URL === "PASTE_HERE") {
+    showBanner("⚠️ עדכנו את SCRIPT_URL בקובץ index.html כדי לחבר לגיליון.");
+    return;
+  }
+  try {
+    const res = await fetch(SCRIPT_URL, { method: "GET" });
+    const data = await res.json();
+    const rows = Array.isArray(data) ? data : (data.entries || []);
+    rows.forEach(r => {
+      const id = Number(r.id);
+      if (!id) return;
+      responses[id] = {
+        finalName: r.finalName || r.corrected || r.en || "",
+        corrected: r.corrected || "",
+        hatSize: r.hatSize || "",
+        timestamp: r.timestamp || "",
+      };
+    });
+    hideBanner();
+  } catch (e) {
+    showBanner("לא הצלחנו לטעון נתונים קיימים — אפשר עדיין למלא ולשלוח.");
+    console.error(e);
+  }
+}
+
+async function submitResponse(payload) {
+  // text/plain avoids a CORS preflight against Apps Script
+  const res = await fetch(SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload),
+  });
+  return res.json();
+}
+
+/* ============================================================
+   Rendering
+   ============================================================ */
+const listRoot = document.getElementById("listRoot");
+const GROUP_META = {
+  girls: { title: "בנות", emoji: "👧" },
+  boys:  { title: "בנים", emoji: "👦" },
+};
+
+function render(filter = "") {
+  const q = filter.trim().toLowerCase();
+  listRoot.innerHTML = "";
+
+  const groups = ["girls", "boys"];
+  let anyShown = false;
+
+  groups.forEach(g => {
+    const kids = CHILDREN.filter(c =>
+      c.group === g &&
+      (!q || c.he.toLowerCase().includes(q) || c.en.toLowerCase().includes(q))
+    );
+    if (!kids.length) return;
+    anyShown = true;
+
+    const h = document.createElement("div");
+    h.className = "group-title";
+    h.textContent = `${GROUP_META[g].emoji} ${GROUP_META[g].title}`;
+    listRoot.appendChild(h);
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    kids.forEach(c => grid.appendChild(cardEl(c)));
+    listRoot.appendChild(grid);
+  });
+
+  if (!anyShown) {
+    const e = document.createElement("div");
+    e.className = "empty";
+    e.innerHTML = '<span class="big">🤔</span>לא נמצאו ילדים בשם הזה';
+    listRoot.appendChild(e);
+  }
+
+  updateProgress();
+}
+
+function cardEl(c) {
+  const r = responses[c.id];
+  const done = !!r;
+  const el = document.createElement("div");
+  el.className = "card" + (done ? " done" : "");
+  el.onclick = () => openForm(c.id);
+
+  const enName = done && r.finalName ? r.finalName : c.en;
+  let statusTxt;
+  if (done) {
+    const size = SIZE_LABELS[r.hatSize] || r.hatSize || "—";
+    statusTxt = `✓ מידה ${size}`;
+  } else {
+    statusTxt = "להשלמה";
+  }
+
+  el.innerHTML = `
+    <div class="check">✓</div>
+    <div class="avatar">${escapeHtml(firstLetter(c.he))}</div>
+    <div class="he">${escapeHtml(c.he)}</div>
+    <div class="en">${escapeHtml(enName)}</div>
+    <div class="status">${escapeHtml(statusTxt)}</div>
+  `;
+  return el;
+}
+
+function firstLetter(name) {
+  return (name || "").trim().charAt(0) || "•";
+}
+
+function updateProgress() {
+  const total = CHILDREN.length;
+  const done = Object.keys(responses).length;
+  document.getElementById("totalCount").textContent = total;
+  document.getElementById("doneCount").textContent = done;
+  document.getElementById("progressFill").style.width =
+    (total ? Math.round((done / total) * 100) : 0) + "%";
+}
+
+/* ============================================================
+   Modal logic
+   ============================================================ */
+const overlay = document.getElementById("overlay");
+const enName = document.getElementById("enName");
+const hatSize = document.getElementById("hatSize");
+const formMsg = document.getElementById("formMsg");
+const btnSubmit = document.getElementById("btnSubmit");
+
+function openForm(id) {
+  currentId = id;
+  const c = CHILDREN.find(x => x.id === id);
+  const r = responses[id];
+
+  document.getElementById("mHe").textContent = c.he;
+  document.getElementById("mEn").textContent = c.en;
+  document.getElementById("mRing").textContent = firstLetter(c.he);
+
+  formMsg.textContent = "";
+  formMsg.className = "msg";
+
+  // prefill from existing response (English name + size)
+  if (r) {
+    hatSize.value = r.hatSize || "";
+    enName.value = r.finalName || r.corrected || c.en;
+    btnSubmit.textContent = "עדכון";
+  } else {
+    hatSize.value = "";
+    enName.value = c.en;
+    btnSubmit.textContent = "שליחה";
+  }
+
+  overlay.classList.add("open");
+}
+
+function closeForm() {
+  overlay.classList.remove("open");
+  currentId = null;
+}
+
+document.getElementById("btnCancel").onclick = closeForm;
+overlay.onclick = (e) => { if (e.target === overlay) closeForm(); };
+
+btnSubmit.onclick = async () => {
+  const c = CHILDREN.find(x => x.id === currentId);
+  if (!c) return;
+
+  // validation
+  const finalName = enName.value.trim();
+  if (!finalName) {
+    return showFormMsg("נא להשלים את השם באנגלית", "err");
+  }
+  if (!hatSize.value) {
+    return showFormMsg("נא לבחור מידת כובע", "err");
+  }
+
+  // corrected = English spelling only if it differs from the original
+  const spellingCorrect = finalName.toLowerCase() === c.en.toLowerCase();
+  const corrected = spellingCorrect ? "" : finalName;
+
+  if (SCRIPT_URL === "PASTE_HERE") {
+    return showFormMsg("השרת לא מחובר (SCRIPT_URL ריק)", "err");
+  }
+
+  const payload = {
+    id: c.id,
+    he: c.he,
+    en: c.en,
+    corrected: corrected,
+    finalName: finalName,
+    spellingCorrect: spellingCorrect,
+    hatSize: hatSize.value,
+    timestamp: new Date().toISOString(),
+  };
+
+  btnSubmit.disabled = true;
+  showFormMsg("שולח…", "");
+
+  // optimistic update
+  const prev = responses[c.id];
+  responses[c.id] = {
+    finalName, corrected, hatSize: hatSize.value, timestamp: payload.timestamp,
+  };
+  render(document.getElementById("searchBox").value);
+
+  try {
+    await submitResponse(payload);
+    closeForm();
+    showToast(prev ? "עודכן! ✨" : "נשמר! 🎉");
+  } catch (e) {
+    // rollback
+    if (prev) responses[c.id] = prev; else delete responses[c.id];
+    render(document.getElementById("searchBox").value);
+    showFormMsg("השליחה נכשלה — נסו שוב 🙏", "err");
+    console.error(e);
+  } finally {
+    btnSubmit.disabled = false;
+  }
+};
+
+/* ============================================================
+   Helpers
+   ============================================================ */
+function showFormMsg(t, cls) { formMsg.textContent = t; formMsg.className = "msg " + (cls || ""); }
+function showBanner(t) { const b = document.getElementById("loadingBanner"); b.textContent = t; b.style.display = "block"; }
+function hideBanner() { document.getElementById("loadingBanner").style.display = "none"; }
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m =>
+    ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
+}
+let toastTimer;
+function showToast(t) {
+  const el = document.getElementById("toast");
+  el.textContent = t;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+document.getElementById("searchBox").addEventListener("input", e => render(e.target.value));
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeForm(); });
+
+/* ============================================================
+   Init
+   ============================================================ */
+render();
+loadResponses().then(() => render(document.getElementById("searchBox").value));
+</script>
+</body>
+</html>
