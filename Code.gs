@@ -88,12 +88,17 @@ function doPost(e) {
     ];
 
     // Look for an existing row with this id (column 1).
-    var ids = sheet.getRange(2, 1, Math.max(sheet.getLastRow() - 1, 0), 1).getValues();
+    // Guard: when the sheet has only the header row (lastRow === 1),
+    // getRange(2, 1, 0, 1) is illegal and throws — skip the lookup.
+    var lastRow = sheet.getLastRow();
     var foundRow = -1;
-    for (var i = 0; i < ids.length; i++) {
-      if (String(ids[i][0]) === String(data.id)) {
-        foundRow = i + 2; // +2: skip header + 0-index
-        break;
+    if (lastRow >= 2) {
+      var ids = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+      for (var i = 0; i < ids.length; i++) {
+        if (String(ids[i][0]) === String(data.id)) {
+          foundRow = i + 2; // +2: skip header + 0-index
+          break;
+        }
       }
     }
 
